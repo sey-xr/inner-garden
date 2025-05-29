@@ -12,8 +12,8 @@
   <body>
     <a-scene environment="preset: forest; groundColor: #384001">
       <a-assets>
-        <a-asset-item id="plants" src="/src/plants.glb"></a-asset-item>
-        <audio id="music" src="/src/JourneyHomeChrisHaugen.mp3"></audio>
+        <a-asset-item id="plants" src="./src/plants.glb"></a-asset-item>
+        <audio id="music" src="./src/JourneyHomeChrisHaugen.mp3"></audio>
       </a-assets>
 
       <a-sound
@@ -41,7 +41,7 @@
 
       <!-- Partículas emergiendo del centro con textura -->
       <a-entity
-        particle-system="particleCount: 500; color: #6FD904, #FFFFFF; size: 1; velocityValue: 6 2 6; opacity: 1; texture: /src/smoke.png"
+        particle-system="particleCount: 500; color: #6FD904, #FFFFFF; size: 1; velocityValue: 6 2 6; opacity: 1; texture: ./src/smoke.png"
         position="0 1 0"
       ></a-entity>
 
