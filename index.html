@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Inner Garden</title>
+    <script src="https://aframe.io/releases/1.7.1/aframe.min.js"></script>
+    <script src="https://unpkg.com/aframe-orbit-controls@3.0.0/dist/aframe-orbit-controls.min.js"></script>
+    <script src="https://unpkg.com/aframe-look-at-component@3.0.0/dist/aframe-look-at-component.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/gh/IdeaSpaceVR/aframe-particle-system-component@v1.0.0/dist/aframe-particle-system-component.min.js"></script>
+  </head>
+  <body>
+    <a-scene environment="preset: forest; groundColor: #384001">
+      <a-assets>
+        <a-asset-item id="plants" src="/src/plants.glb"></a-asset-item>
+        <audio id="music" src="/src/JourneyHomeChrisHaugen.mp3"></audio>
+      </a-assets>
+
+      <a-sound
+        src="#music"
+        autoplay="true"
+        loop="true"
+        position="0 2 0"
+      ></a-sound>
+      <a-entity camera look-controls orbit-controls position="0 3 3.5"></a-entity>
+
+      <a-text
+        value="INNER GARDEN"
+        position="0 3.5 0"
+        align="center"
+        color="#6FD904"
+      ></a-text>
+      <a-plane
+        position="0 0 0"
+        rotation="-90 0 0"
+        width="10"
+        height="10"
+        color="#384001"
+      ></a-plane>
+      <a-sky color="#153840"></a-sky>
+
+      <!-- Partículas emergiendo del centro con textura -->
+      <a-entity
+        particle-system="particleCount: 500; color: #6FD904, #FFFFFF; size: 1; velocityValue: 6 2 6; opacity: 1; texture: /src/smoke.png"
+        position="0 1 0"
+      ></a-entity>
+
+      <!-- Luz amarilla direccional con animación -->
+      <a-light
+        type="directional"
+        color="#FFFF00"
+        intensity="0.5"
+        position="0 2 0"
+        pulse-light="minIntensity: 0.5; maxIntensity: 4; duration: 3000"
+      ></a-light>
+
+      <!--PLANT-->
+      <a-entity class="plant" position="0 0 0">
+        <a-entity
+          gltf-model="#plants"
+          position="0 0 0"
+          scale="0.5 0.5 0.5"
+          rotation="0 0 0"
+          look-at="[camera]"
+        ></a-entity>
+        <a-text
+          value="Plant of"
+          position="-0.62 0.73 0.1"
+          rotation="0 0 0"
+          align="center"
+          width="2"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="CONTROL"
+          position="-0.57 0.6 0.1"
+          rotation="0 0 0"
+          align="center"
+          width="2"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="Who...?"
+          position="0 0.35 0.1"
+          rotation="0 0 -5"
+          align="center"
+          width="3"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="What...?"
+          position="0 0.6 0.1"
+          rotation="0 0 5"
+          align="center"
+          width="3"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="How...?"
+          position="0 0.85 0.1"
+          rotation="0 0 5"
+          align="center"
+          width="3"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="When...?"
+          position="0 1.05 0.1"
+          rotation="0 0 5"
+          align="center"
+          width="3"
+          color="#6FD904"
+        ></a-text>
+        <a-text
+          value="Why...?"
+          position="0 1.45 0.1"
+          rotation="0 0 20"
+          align="center"
+          width="3"
+          color="#6FD904"
+        ></a-text>
+      </a-entity>
+    </a-scene>
+
+    <script>
+      AFRAME.registerComponent('pulse-light', {
+        schema: {
+          minIntensity: { type: 'number', default: 1 },
+          maxIntensity: { type: 'number', default: 2 },
+          duration: { type: 'number', default: 2000 }
+        },
+        init: function () {
+          this.el.setAttribute('animation', {
+            property: 'intensity',
+            from: this.data.minIntensity,
+            to: this.data.maxIntensity,
+            dur: this.data.duration,
+            dir: 'alternate',
+            loop: true,
+            easing: 'linear'
+          });
+        }
+      });
+    </script>
+  </body>
+</html>
